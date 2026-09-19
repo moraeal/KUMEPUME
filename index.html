@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script>
       (function () {
+        var currentUrl = new URL(window.location.href);
+        var spaTarget = currentUrl.searchParams.get("kumepume-spa");
+        if (spaTarget) {
+          window.history.replaceState({}, "", spaTarget);
+        }
+
         var recoveryStarted = false;
         var retryKey = "kumepume-reload";
 

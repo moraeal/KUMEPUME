@@ -11,6 +11,7 @@ import {
   Sparkles,
   Users,
 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const base = import.meta.env.BASE_URL;
 
@@ -35,11 +36,11 @@ const impact = [
 ];
 
 const quickLinks = [
-  { label: "단체 소개", detail: "꿈에품에가 지향하는 변화", href: "#work" },
-  { label: "주요 사업", detail: "사람·시민·공익·세계", href: "#work" },
-  { label: "활동과 성과", detail: "숫자와 현장으로 보는 변화", href: "#impact" },
-  { label: "함께하기", detail: "후원·봉사·기업협력", href: "#join" },
-  { label: "투명경영", detail: "정관·공시·연차보고", href: "#transparency" },
+  { label: "단체 소개", detail: "꿈에품에가 지향하는 변화", href: "/about" },
+  { label: "주요 사업", detail: "사람·시민·공익·세계", href: "/programs" },
+  { label: "활동과 성과", detail: "숫자와 현장으로 보는 변화", href: "/activities" },
+  { label: "함께하기", detail: "후원·봉사·기업협력", href: "/join" },
+  { label: "투명경영", detail: "정관·공시·연차보고", href: "/transparency" },
 ];
 
 export default function Home() {
@@ -51,7 +52,7 @@ export default function Home() {
             <p className="kumepume-eyebrow">CIVIC ACTION · SOCIAL IMPACT</p>
             <h1 id="hero-title" className="mt-7 max-w-3xl text-[clamp(2.8rem,4.55vw,4.2rem)] font-black leading-[1.08] tracking-[-.055em] text-[#183b33]">꿈을 품고,<br />시민의 힘을 키웁니다.</h1>
             <p className="mt-7 max-w-2xl text-lg font-medium leading-8 text-charcoal/70 sm:text-xl sm:leading-9">KUMEPUME는 나눔과 공익봉사를 통해 사람의 가능성을 키우고, 시민과 기업의 책임 있는 참여를 사회적 변화로 연결합니다.</p>
-            <div className="mt-9 flex flex-wrap gap-3"><a href="#work" className="kumepume-button-primary">우리가 하는 일 <ArrowRight size={18} /></a><a href="#join" className="kumepume-button-secondary">함께하기</a></div>
+            <div className="mt-9 flex flex-wrap gap-3"><Link to="/programs" className="kumepume-button-primary">우리가 하는 일 <ArrowRight size={18} /></Link><Link to="/join" className="kumepume-button-secondary">함께하기</Link></div>
             <div className="mt-12 grid max-w-xl gap-4 border-t border-[#183b33]/15 pt-6 sm:grid-cols-2">
               <p className="flex gap-3 text-sm font-bold leading-6 text-[#183b33]"><CheckCircle2 className="mt-0.5 shrink-0 text-[#e88920]" size={19} />노블레스 오블리주를 시민적 공익봉사로 확산합니다.</p>
               <p className="flex gap-3 text-sm font-bold leading-6 text-[#183b33]"><CheckCircle2 className="mt-0.5 shrink-0 text-[#e88920]" size={19} />선의를 지속가능한 소셜 임팩트로 만듭니다.</p>
@@ -68,9 +69,9 @@ export default function Home() {
       <nav className="border-y border-[#183b33]/10 bg-white" aria-label="메인페이지 바로가기">
         <div className="container-page grid sm:grid-cols-2 lg:grid-cols-5">
           {quickLinks.map((item, index) => (
-            <a
+            <Link
               key={item.label}
-              href={item.href}
+              to={item.href}
               className={`group flex min-h-[112px] items-center justify-between gap-4 py-6 transition hover:bg-[#f2f7ed] sm:px-6 ${index > 0 ? "border-t border-[#183b33]/10 sm:border-t-0 lg:border-l" : ""} ${index === 2 || index === 4 ? "sm:border-l lg:border-l" : ""}`}
             >
               <span>
@@ -78,7 +79,7 @@ export default function Home() {
                 <small className="mt-1.5 block text-xs leading-5 text-charcoal/48">{item.detail}</small>
               </span>
               <ArrowRight className="shrink-0 text-[#e47716] transition group-hover:translate-x-1" size={18} />
-            </a>
+            </Link>
           ))}
         </div>
       </nav>
@@ -112,7 +113,7 @@ export default function Home() {
       </section>
 
       <section id="stories" className="scroll-mt-32 bg-[#f4f0e7] py-20 sm:py-24">
-        <div className="container-page"><p className="kumepume-eyebrow">CHANGE STORIES</p><div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end"><h2 className="kumepume-section-title">변화는 사람과 현장에서 시작됩니다</h2><a href="#join" className="inline-flex items-center gap-2 text-sm font-black text-[#183b33]">함께 만드는 방법 <ArrowRight size={17} /></a></div><div className="mt-12 grid gap-6 lg:grid-cols-3">{stories.map((story) => <article key={story.title} className="group overflow-hidden bg-white"><div className="aspect-[4/3] overflow-hidden"><img src={story.image} alt={story.alt} className="size-full object-cover transition duration-700 group-hover:scale-[1.035]" /></div><div className="p-7"><p className="text-xs font-black tracking-[.14em] text-[#e47716]">{story.label}</p><h3 className="mt-3 text-2xl font-black leading-8 tracking-[-.035em] text-[#183b33]">{story.title}</h3><p className="mt-4 text-[15px] leading-7 text-charcoal/60">{story.summary}</p></div></article>)}</div></div>
+        <div className="container-page"><p className="kumepume-eyebrow">CHANGE STORIES</p><div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end"><h2 className="kumepume-section-title">변화는 사람과 현장에서 시작됩니다</h2><Link to="/join" className="inline-flex items-center gap-2 text-sm font-black text-[#183b33]">함께 만드는 방법 <ArrowRight size={17} /></Link></div><div className="mt-12 grid gap-6 lg:grid-cols-3">{stories.map((story) => <article key={story.title} className="group overflow-hidden bg-white"><div className="aspect-[4/3] overflow-hidden"><img src={story.image} alt={story.alt} className="size-full object-cover transition duration-700 group-hover:scale-[1.035]" /></div><div className="p-7"><p className="text-xs font-black tracking-[.14em] text-[#e47716]">{story.label}</p><h3 className="mt-3 text-2xl font-black leading-8 tracking-[-.035em] text-[#183b33]">{story.title}</h3><p className="mt-4 text-[15px] leading-7 text-charcoal/60">{story.summary}</p></div></article>)}</div></div>
       </section>
 
       <section id="seed-voice" className="scroll-mt-32 bg-white py-20 sm:py-24">
@@ -128,10 +129,10 @@ export default function Home() {
             [Sparkles, "재능기부", "전문성과 경험을 필요한 현장에 연결합니다."],
             [Building2, "기업협력", "기업의 사회공헌을 지속가능한 사업으로 만듭니다."],
             [Users, "공익봉사", "시민이 직접 참여하는 행동을 함께 기획합니다."],
-          ].map(([Icon, title, description]) => { const JoinIcon = Icon as typeof HeartHandshake; return <a href="#contact" key={title as string} className="group bg-white/92 p-6 transition hover:-translate-y-1 hover:bg-white"><JoinIcon size={24} className="text-[#e47716]"/><strong className="mt-5 block text-xl font-black text-[#183b33]">{title as string}</strong><span className="mt-2 block text-sm leading-6 text-charcoal/58">{description as string}</span><ArrowRight className="mt-5 text-[#183b33] transition group-hover:translate-x-1" size={18}/></a>; })}</div></div></div>
+          ].map(([Icon, title, description], index) => { const JoinIcon = Icon as typeof HeartHandshake; const href = ["/join/donate", "/join/volunteer", "/join/corporate", "/join/member"][index]; return <Link to={href} key={title as string} className="group bg-white/92 p-6 transition hover:-translate-y-1 hover:bg-white"><JoinIcon size={24} className="text-[#e47716]"/><strong className="mt-5 block text-xl font-black text-[#183b33]">{title as string}</strong><span className="mt-2 block text-sm leading-6 text-charcoal/58">{description as string}</span><ArrowRight className="mt-5 text-[#183b33] transition group-hover:translate-x-1" size={18}/></Link>; })}</div></div></div>
       </section>
 
-      <section id="transparency" className="scroll-mt-32 bg-white py-16 sm:py-20"><div className="container-page grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center"><div><p className="kumepume-eyebrow">TRUST & TRANSPARENCY</p><h2 className="mt-4 text-3xl font-black tracking-[-.04em] text-[#183b33] sm:text-4xl">공익은 신뢰 위에서 자랍니다</h2><p className="mt-4 max-w-2xl text-base leading-8 text-charcoal/60">정관, 기부금 사용 내역, 결산서류와 사업성과를 누구나 쉽게 확인할 수 있도록 공개하겠습니다.</p></div><div className="flex flex-wrap gap-3"><a href="#contact" className="kumepume-button-secondary">투명경영 보기</a><a href="#contact" className="kumepume-button-primary">연차보고서</a></div></div></section>
+      <section id="transparency" className="scroll-mt-32 bg-white py-16 sm:py-20"><div className="container-page grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center"><div><p className="kumepume-eyebrow">TRUST & TRANSPARENCY</p><h2 className="mt-4 text-3xl font-black tracking-[-.04em] text-[#183b33] sm:text-4xl">공익은 신뢰 위에서 자랍니다</h2><p className="mt-4 max-w-2xl text-base leading-8 text-charcoal/60">정관, 기부금 사용 내역, 결산서류와 사업성과를 누구나 쉽게 확인할 수 있도록 공개하겠습니다.</p></div><div className="flex flex-wrap gap-3"><Link to="/transparency" className="kumepume-button-secondary">투명경영 보기</Link><Link to="/transparency/reports" className="kumepume-button-primary">연차보고서</Link></div></div></section>
     </div>
   );
 }

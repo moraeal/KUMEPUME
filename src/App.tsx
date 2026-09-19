@@ -3,6 +3,8 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 import ScrollToTop from "./components/ScrollToTop";
 import Home from "./pages/Home";
+import KumepumeAbout from "./pages/KumepumeAbout";
+import SectionPreview from "./pages/SectionPreview";
 
 export default function App() {
   return (
@@ -11,7 +13,15 @@ export default function App() {
       <Header />
       <main>
         <Routes>
-          <Route path="*" element={<Home />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<KumepumeAbout />} />
+          <Route path="/programs/*" element={<SectionPreview section="programs" />} />
+          <Route path="/activities/*" element={<SectionPreview section="activities" />} />
+          <Route path="/transparency/*" element={<SectionPreview section="transparency" />} />
+          <Route path="/join/*" element={<SectionPreview section="join" />} />
+          <Route path="/contact" element={<SectionPreview section="contact" />} />
+          <Route path="/about/*" element={<SectionPreview section="about" />} />
+          <Route path="*" element={<SectionPreview section="not-found" />} />
         </Routes>
       </main>
       <Footer />
