@@ -5,6 +5,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import Activities from "./pages/Activities";
 import ActivityDetail from "./pages/ActivityDetail";
 import Home from "./pages/Home";
+import AboutSubpage from "./pages/AboutSubpage";
 import KumepumeAbout from "./pages/KumepumeAbout";
 import Join from "./pages/Join";
 import Programs from "./pages/Programs";
@@ -29,7 +30,7 @@ export default function App() {
           <Route path="/transparency/*" element={<Transparency />} />
           <Route path="/join/*" element={<Join />} />
           <Route path="/contact" element={<Join />} />
-          <Route path="/about/*" element={<SectionPreview section="about" />} />
+          <Route path="/about/*" element={<AboutSubpage />} />
           <Route path="*" element={<SectionPreview section="not-found" />} />
         </Routes>
       </main>
