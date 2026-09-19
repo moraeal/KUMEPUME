@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "navigation": [
+    {
+      "label": "꿈에품에",
+      "path": "/about",
+      "children": ["/about", "/about/message", "/about/history", "/about/organization", "/about/identity", "/about/partners", "/about/contact"]
+    },
+    {
+      "label": "사업",
+      "path": "/programs",
+      "children": ["/programs/care", "/programs/citizens", "/programs/public-interest", "/programs/global", "/programs/archive"]
+    },
+    {
+      "label": "활동과 성과",
+      "path": "/activities",
+      "children": ["/activities", "/activities/stories", "/activities/events", "/activities/media", "/activities/archive", "/stories/people"]
+    },
+    {
+      "label": "씨앗의 소리",
+      "path": "/seed-voice",
+      "children": ["/seed-voice", "/seed-voice/editorial-independence"]
+    },
+    {
+      "label": "투명경영",
+      "path": "/transparency",
+      "children": ["/transparency/corporate", "/transparency/governance", "/transparency/plans", "/transparency/donations", "/transparency/financials", "/transparency/reports"]
+    },
+    {
+      "label": "함께하기",
+      "path": "/join",
+      "children": ["/join/donate", "/join/member", "/join/volunteer", "/join/corporate", "/contact"]
+    }
+  ],
+  "legacyPages": [
+    {"sourcePath": "/blank-3", "destination": "/about", "status": "migrate"},
+    {"sourcePath": "/blank-13", "destination": "/about/message", "status": "migrate"},
+    {"sourcePath": "/blank-12", "destination": "/about/organization", "status": "migrate"},
+    {"sourcePath": "/ci", "destination": "/about/identity", "status": "migrate"},
+    {"sourcePath": "/1", "destination": "/about/partners", "status": "merge"},
+    {"sourcePath": "/2", "destination": "/about/partners", "status": "merge"},
+    {"sourcePath": "/blank-15", "destination": "/about/partners", "status": "merge"},
+    {"sourcePath": "/blank-17", "destination": "/about/contact", "status": "migrate-after-verification"},
+    {"sourcePath": "/blank-28", "destination": "/programs/global", "status": "migrate"},
+    {"sourcePath": "/blank-29", "destination": "/programs/archive", "status": "migrate"},
+    {"sourcePath": "/blank-8", "destination": "/programs/global/gh-partnership", "status": "migrate"},
+    {"sourcePath": "/gkl", "destination": "/programs/global/gkl-partnership", "status": "migrate"},
+    {"sourcePath": "/lg", "destination": "/programs/global/lg-international-partnership", "status": "migrate"},
+    {"sourcePath": "/lg-1", "destination": "/programs/global/lg-electronics-partnership", "status": "migrate"},
+    {"sourcePath": "/blank-23", "destination": "/programs/citizens/noble-heart", "status": "migrate"},
+    {"sourcePath": "/blank-11", "destination": "/stories/archive/noble-heart-club", "status": "migrate"},
+    {"sourcePath": "/blank-10", "destination": "/stories/archive/noble-heart-declaration", "status": "migrate"},
+    {"sourcePath": "/blank-7", "destination": "/join/volunteer", "status": "migrate"},
+    {"sourcePath": "/blank-18", "destination": "/activities/archive", "status": "migrate"},
+    {"sourcePath": "/blank-2", "destination": "/activities", "status": "migrate"},
+    {"sourcePath": "/allim01", "destination": "/activities/events/multicultural-youth-kpop-school", "status": "migrate"},
+    {"sourcePath": "/blank-9", "destination": "/stories/archive", "status": "migrate"},
+    {"sourcePath": "/blank-20", "destination": "/stories/videos", "status": "migrate"},
+    {"sourcePath": "/578", "destination": "/stories/people/ryu-geun-cheol", "status": "migrate"},
+    {"sourcePath": "/blank-22", "destination": "/stories/people/jang-gi-ryeo", "status": "migrate"},
+    {"sourcePath": "/blank-21", "destination": "/stories/people/toshio-doko", "status": "migrate"},
+    {"sourcePath": "/blank-6", "destination": "/stories/people/jean-chretien", "status": "migrate"},
+    {"sourcePath": "/blank-25", "destination": "/stories/people/kang-seok-sung", "status": "migrate"},
+    {"sourcePath": "/blank-26", "destination": "/stories/people/kang-gyeong-hwan", "status": "migrate"},
+    {"sourcePath": "/blank-4", "destination": "/join/donate", "status": "migrate"},
+    {"sourcePath": "/blank-14", "destination": "/transparency/donations", "status": "migrate"},
+    {"sourcePath": "/blank-16", "destination": "/transparency/reports", "status": "verify-attachments"},
+    {"sourcePath": "/blank-5", "destination": "/transparency/resources", "status": "merge"},
+    {"sourcePath": "/blank-19", "destination": "/transparency/resources", "status": "merge"},
+    {"sourcePath": "/blank-24", "destination": "/transparency/governance", "status": "migrate-after-verification"},
+    {"sourcePath": "/blank", "destination": "/activities/newsletter", "status": "verify-content"},
+    {"sourcePath": "/home", "destination": "/", "status": "redirect"},
+    {"sourcePath": "/blank-1", "destination": "/", "status": "redirect"},
+    {"sourcePath": "/team-1", "destination": null, "status": "archive-only"},
+    {"sourcePath": "/portfolio", "destination": null, "status": "archive-only"},
+    {"sourcePath": "/aitem", "destination": null, "status": "archive-only"},
+    {"sourcePath": "/keipab-konteseuteu", "destination": null, "status": "archive-only"},
+    {"sourcePath": "/keipab-konteseuteu-1", "destination": null, "status": "archive-only"},
+    {"sourcePath": "/news", "destination": null, "status": "archive-only"}
+  ],
+  "bulkRules": [
+    {"sourcePrefix": "/single-post/", "destinationPrefix": "/activities/archive/", "status": "migrate"},
+    {"sourcePrefix": "/blank-2/categories/", "destinationPrefix": "/activities?category=", "status": "redirect"},
+    {"sourcePrefix": "/blank-27/", "destinationPrefix": "/activities/events/", "status": "migrate"},
+    {"sourcePrefix": "/portfolio/", "destinationPrefix": null, "status": "archive-only"},
+    {"sourcePrefix": "/aitem/", "destinationPrefix": null, "status": "archive-only"}
+  ]
+}
