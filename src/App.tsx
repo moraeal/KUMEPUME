@@ -13,6 +13,7 @@ import Programs from "./pages/Programs";
 import Transparency from "./pages/Transparency";
 import LegacyArchive from "./pages/LegacyArchive";
 import LegacyStoryDetail from "./pages/LegacyStoryDetail";
+import LegacyVideos from "./pages/LegacyVideos";
 
 export default function App() {
   return (
@@ -31,6 +32,7 @@ export default function App() {
           <Route path="/activities/:activityId" element={<ActivityDetail />} />
           <Route path="/stories/archive" element={<LegacyArchive />} />
           <Route path="/stories/archive/:storyId" element={<LegacyStoryDetail />} />
+          <Route path="/stories/videos" element={<LegacyVideos />} />
           <Route path="/transparency/*" element={<Transparency />} />
           <Route path="/join/*" element={<Join />} />
           <Route path="/contact" element={<Join />} />

@@ -36,8 +36,8 @@ const staticRules = {
   "/lg-1": ["migrated", "/stories/archive/lg-electronics-partnership", "LG전자 협력 기록 원문·이미지 이전"],
   "/blank-11": ["migrated", "/stories/archive/noble-heart-club", "노블하트 클럽 원문·이미지 이전"],
   "/blank-10": ["migrated", "/stories/archive/noble-heart-declaration", "노블하트 선언문 원문·이미지 이전"],
-  "/blank-9": ["pending-migration", null, "노블레스 자료실 첨부·영상 재검토"],
-  "/blank-20": ["pending-migration", null, "노블레스 동영상 원본·권리 재검토"],
+  "/blank-9": ["migrated", "/stories/archive", "나눔 인물 6건을 과거 기록 아카이브에 통합"],
+  "/blank-20": ["migrated", "/stories/videos", "영상 제목 보존, 확인된 외부 제공 주소만 연결"],
   "/578": ["migrated", "/stories/archive/ryu-geun-cheol", "류근철 박사 인물 기록 원문·이미지 이전"],
   "/blank-22": ["migrated", "/stories/archive/jang-gi-ryeo", "장기려 박사 인물 기록 원문·이미지 이전"],
   "/blank-21": ["migrated", "/stories/archive/toshio-doko", "도코 도시오 인물 기록 원문·이미지 이전"],
@@ -78,6 +78,7 @@ function classify(page) {
   if (oldPath.startsWith("/home-1/")) return ["redirect", "/activities/uzbekistan-pellet-fuel-2023", "기존 활동 글의 중복 동적 페이지"];
   if (oldPath.startsWith("/news/")) {
     if (sampleNewsTitles.has(page.title)) return ["archive-only", null, "Wix 영문 뉴스 샘플"];
+    if (page.title.startsWith("10조 기부해도")) return ["migrated", "/stories/archive/charles-feeney", "찰스 척 피니 기록을 저작권 안전 요약·원본 주소로 보존"];
     return ["pending-migration", null, "기부문화 인물·해외사례 읽을거리"];
   }
   return staticRules[oldPath] ?? ["pending-migration", null, "자동 분류되지 않은 실콘텐츠 재검토"];

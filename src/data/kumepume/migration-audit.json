@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "auditedAt": "2026-09-19T09:30:04.986Z",
+  "auditedAt": "2026-09-19T09:41:19.638Z",
   "source": {
     "urls": 92,
     "capturedUrls": 92,
@@ -15,15 +15,15 @@
   },
   "renewal": {
     "pageStatusCounts": {
-      "migrated": 54,
+      "migrated": 57,
       "redirect": 10,
       "verification-pending": 3,
-      "pending-migration": 3,
+      "pending-migration": 0,
       "archive-only": 22
     },
-    "redirectableLegacyUrls": 66,
+    "redirectableLegacyUrls": 69,
     "publicActivityDetails": 24,
-    "publicDisplayImages": 44,
+    "publicDisplayImages": 45,
     "publicTransparencyDocuments": 8,
     "archiveOnlyDocuments": 2,
     "unresolvedLegacyAttachment": "2015 기부금 결산 공고의 첨부 원본"
@@ -95,9 +95,9 @@
       "sourcePath": "/blank-9",
       "title": "노블레스 자료실",
       "kind": "page",
-      "migrationStatus": "pending-migration",
-      "destination": null,
-      "note": "노블레스 자료실 첨부·영상 재검토",
+      "migrationStatus": "migrated",
+      "destination": "/stories/archive",
+      "note": "나눔 인물 6건을 과거 기록 아카이브에 통합",
       "originalImages": 7,
       "originalDocuments": 0
     },
@@ -227,9 +227,9 @@
       "sourcePath": "/blank-20",
       "title": "노블레스 동영상",
       "kind": "page",
-      "migrationStatus": "pending-migration",
-      "destination": null,
-      "note": "노블레스 동영상 원본·권리 재검토",
+      "migrationStatus": "migrated",
+      "destination": "/stories/videos",
+      "note": "영상 제목 보존, 확인된 외부 제공 주소만 연결",
       "originalImages": 1,
       "originalDocuments": 0
     },
@@ -1067,9 +1067,9 @@
       "sourcePath": "/news/10%EC%A1%B0-%EA%B8%B0%EB%B6%80%ED%95%B4%EB%8F%84-%EC%9D%B4%EB%A6%84-%EB%94%B4-%EA%B1%B4%EB%AC%BC-%ED%95%98%EB%82%98-%EC%97%86%EC%97%88%EB%8B%A4...--%E7%BE%8E%EB%B6%80%ED%98%B8%EC%9D%98-%EC%98%81%EC%9B%85%2C-%EC%98%81%EB%A9%B4",
       "title": "10조 기부해도 이름 딴 건물 하나 없었다...\n美부호의 영웅, 영면",
       "kind": "dynamic",
-      "migrationStatus": "pending-migration",
-      "destination": null,
-      "note": "기부문화 인물·해외사례 읽을거리",
+      "migrationStatus": "migrated",
+      "destination": "/stories/archive/charles-feeney",
+      "note": "찰스 척 피니 기록을 저작권 안전 요약·원본 주소로 보존",
       "originalImages": 2,
       "originalDocuments": 0
     },
