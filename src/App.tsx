@@ -14,11 +14,13 @@ import Transparency from "./pages/Transparency";
 import LegacyArchive from "./pages/LegacyArchive";
 import LegacyStoryDetail from "./pages/LegacyStoryDetail";
 import LegacyVideos from "./pages/LegacyVideos";
+import KumepumeRouteMetadata from "./components/KumepumeRouteMetadata";
 
 export default function App() {
   return (
     <div className="min-h-screen bg-[#fffdf8] text-charcoal">
       <ScrollToTop />
+      <KumepumeRouteMetadata />
       <Header />
       <main>
         <Routes>
