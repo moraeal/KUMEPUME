@@ -6,6 +6,7 @@ import Activities from "./pages/Activities";
 import ActivityDetail from "./pages/ActivityDetail";
 import Home from "./pages/Home";
 import KumepumeAbout from "./pages/KumepumeAbout";
+import Join from "./pages/Join";
 import Programs from "./pages/Programs";
 import SectionPreview from "./pages/SectionPreview";
 import Transparency from "./pages/Transparency";
@@ -26,8 +27,8 @@ export default function App() {
           <Route path="/activities/archive" element={<Activities />} />
           <Route path="/activities/:activityId" element={<ActivityDetail />} />
           <Route path="/transparency/*" element={<Transparency />} />
-          <Route path="/join/*" element={<SectionPreview section="join" />} />
-          <Route path="/contact" element={<SectionPreview section="contact" />} />
+          <Route path="/join/*" element={<Join />} />
+          <Route path="/contact" element={<Join />} />
           <Route path="/about/*" element={<SectionPreview section="about" />} />
           <Route path="*" element={<SectionPreview section="not-found" />} />
         </Routes>
