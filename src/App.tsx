@@ -2,6 +2,8 @@ import { Route, Routes } from "react-router-dom";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import ScrollToTop from "./components/ScrollToTop";
+import Activities from "./pages/Activities";
+import ActivityDetail from "./pages/ActivityDetail";
 import Home from "./pages/Home";
 import KumepumeAbout from "./pages/KumepumeAbout";
 import Programs from "./pages/Programs";
@@ -17,7 +19,11 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<KumepumeAbout />} />
           <Route path="/programs/*" element={<Programs />} />
-          <Route path="/activities/*" element={<SectionPreview section="activities" />} />
+          <Route path="/activities" element={<Activities />} />
+          <Route path="/activities/stories" element={<Activities />} />
+          <Route path="/activities/events" element={<Activities />} />
+          <Route path="/activities/archive" element={<Activities />} />
+          <Route path="/activities/:activityId" element={<ActivityDetail />} />
           <Route path="/transparency/*" element={<SectionPreview section="transparency" />} />
           <Route path="/join/*" element={<SectionPreview section="join" />} />
           <Route path="/contact" element={<SectionPreview section="contact" />} />

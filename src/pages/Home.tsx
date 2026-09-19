@@ -23,9 +23,9 @@ const programs = [
 ];
 
 const stories = [
-  { label: "인재와 자립", title: "청년의 가능성이 일과 미래로 이어지도록", summary: "진로 탐색과 멘토링, 교육의 기회를 연결해 스스로 삶을 설계할 수 있도록 돕습니다.", image: `${base}images/news/youth-career-fair.jpg`, alt: "청년들이 진로 정보를 살펴보는 모습" },
-  { label: "시민과 공동체", title: "서로 다른 시민이 함께 해결책을 찾도록", summary: "세대와 분야를 넘어 경험과 전문성을 나누고 지역의 문제를 함께 풀어갑니다.", image: `${base}images/seed-language/public-interest-citizens-action.webp`, alt: "시민들이 지역 의제를 함께 논의하는 모습" },
-  { label: "공익과 책임", title: "선한 뜻이 측정 가능한 변화로 남도록", summary: "사업의 목표와 과정, 성과와 다음 과제를 투명하게 기록하고 공개합니다.", image: `${base}images/news/youth-career-planning.jpg`, alt: "청년들이 자료를 놓고 함께 계획을 세우는 모습" },
+  { label: "장애예술", title: "발달장애 미술작가들의 작품을 시민과 만나다", summary: "다섯 명의 발달장애 미술작가와 함께 야외 전시와 시민 참여형 예술 프로그램을 진행했습니다.", image: `${base}images/kumepume/programs/disability-art-2024.webp`, alt: "2024년 발달장애 미술작가 전시회 현장", href: "/activities/disability-art-exhibition-2024" },
+  { label: "청소년 문화예술", title: "다문화·고려인 청소년이 K-POP으로 가능성을 찾다", summary: "보컬과 댄스, 문화산업 교육을 통해 서로의 배경을 존중하고 자신의 재능을 발견했습니다.", image: `${base}images/kumepume/programs/multicultural-kpop-2023.webp`, alt: "2023년 다문화청소년 K-POP 아카데미 현장", href: "/activities/multicultural-youth-kpop-academy-2023" },
+  { label: "국제 문화교류", title: "키르기스스탄 고려인과 ‘우리는 하나’를 나누다", summary: "고려인 단체와 함께 문화공연과 교류를 진행하고 지속적인 협력 기반을 만들었습니다.", image: `${base}images/kumepume/programs/kyrgyzstan-exchange-2023.webp`, alt: "2023년 키르기스스탄 고려인 문화교류 참가자들", href: "/activities/kyrgyzstan-cultural-exchange-2023" },
 ];
 
 const impact = [
@@ -113,7 +113,7 @@ export default function Home() {
       </section>
 
       <section id="stories" className="scroll-mt-32 bg-[#f4f0e7] py-20 sm:py-24">
-        <div className="container-page"><p className="kumepume-eyebrow">CHANGE STORIES</p><div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end"><h2 className="kumepume-section-title">변화는 사람과 현장에서 시작됩니다</h2><Link to="/join" className="inline-flex items-center gap-2 text-sm font-black text-[#183b33]">함께 만드는 방법 <ArrowRight size={17} /></Link></div><div className="mt-12 grid gap-6 lg:grid-cols-3">{stories.map((story) => <article key={story.title} className="group overflow-hidden bg-white"><div className="aspect-[4/3] overflow-hidden"><img src={story.image} alt={story.alt} className="size-full object-cover transition duration-700 group-hover:scale-[1.035]" /></div><div className="p-7"><p className="text-xs font-black tracking-[.14em] text-[#e47716]">{story.label}</p><h3 className="mt-3 text-2xl font-black leading-8 tracking-[-.035em] text-[#183b33]">{story.title}</h3><p className="mt-4 text-[15px] leading-7 text-charcoal/60">{story.summary}</p></div></article>)}</div></div>
+        <div className="container-page"><p className="kumepume-eyebrow">CHANGE STORIES</p><div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end"><h2 className="kumepume-section-title">변화는 사람과 현장에서 시작됩니다</h2><Link to="/activities" className="inline-flex items-center gap-2 text-sm font-black text-[#183b33]">활동 기록 전체 보기 <ArrowRight size={17} /></Link></div><div className="mt-12 grid gap-6 lg:grid-cols-3">{stories.map((story) => <Link to={story.href} key={story.title} className="group overflow-hidden bg-white"><div className="aspect-[4/3] overflow-hidden"><img src={story.image} alt={story.alt} className="size-full object-cover transition duration-700 group-hover:scale-[1.035]" /></div><div className="p-7"><p className="text-xs font-black tracking-[.14em] text-[#e47716]">{story.label}</p><h3 className="mt-3 text-2xl font-black leading-8 tracking-[-.035em] text-[#183b33]">{story.title}</h3><p className="mt-4 text-[15px] leading-7 text-charcoal/60">{story.summary}</p></div></Link>)}</div></div>
       </section>
 
       <section id="seed-voice" className="scroll-mt-32 bg-white py-20 sm:py-24">
