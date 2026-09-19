@@ -42,6 +42,7 @@ export default function Activities() {
           <Link to="/activities/stories" className={routeKind === "post" ? "whitespace-nowrap text-[#e47716]" : "whitespace-nowrap hover:text-[#183b33]"}>현장 이야기</Link>
           <Link to="/activities/events" className={routeKind === "event" ? "whitespace-nowrap text-[#e47716]" : "whitespace-nowrap hover:text-[#183b33]"}>행사</Link>
           <Link to="/activities/archive" className="whitespace-nowrap hover:text-[#183b33]">연도별 아카이브</Link>
+          <Link to="/stories/archive" className="whitespace-nowrap hover:text-[#183b33]">과거 기록</Link>
         </div>
       </nav>
 

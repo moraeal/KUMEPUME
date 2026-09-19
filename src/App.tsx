@@ -11,6 +11,8 @@ import KumepumeAbout from "./pages/KumepumeAbout";
 import Join from "./pages/Join";
 import Programs from "./pages/Programs";
 import Transparency from "./pages/Transparency";
+import LegacyArchive from "./pages/LegacyArchive";
+import LegacyStoryDetail from "./pages/LegacyStoryDetail";
 
 export default function App() {
   return (
@@ -27,6 +29,8 @@ export default function App() {
           <Route path="/activities/events" element={<Activities />} />
           <Route path="/activities/archive" element={<Activities />} />
           <Route path="/activities/:activityId" element={<ActivityDetail />} />
+          <Route path="/stories/archive" element={<LegacyArchive />} />
+          <Route path="/stories/archive/:storyId" element={<LegacyStoryDetail />} />
           <Route path="/transparency/*" element={<Transparency />} />
           <Route path="/join/*" element={<Join />} />
           <Route path="/contact" element={<Join />} />
