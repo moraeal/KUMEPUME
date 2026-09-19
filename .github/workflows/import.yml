@@ -23,6 +23,7 @@ jobs:
           rm -rf /tmp/kumepume-source/.git
           find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
           cp -a /tmp/kumepume-source/. .
+          rm -f .github/workflows/deploy.yml
           rm -f .github/workflows/preview-build.yml
           rm -f .github/workflows/repository-drive-backup.yml
           rm -f .github/workflows/supabase-drive-backup.yml
