@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import ScrollToTop from "./components/ScrollToTop";
 import Home from "./pages/Home";
 import KumepumeAbout from "./pages/KumepumeAbout";
+import Programs from "./pages/Programs";
 import SectionPreview from "./pages/SectionPreview";
 
 export default function App() {
@@ -15,7 +16,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<KumepumeAbout />} />
-          <Route path="/programs/*" element={<SectionPreview section="programs" />} />
+          <Route path="/programs/*" element={<Programs />} />
           <Route path="/activities/*" element={<SectionPreview section="activities" />} />
           <Route path="/transparency/*" element={<SectionPreview section="transparency" />} />
           <Route path="/join/*" element={<SectionPreview section="join" />} />
