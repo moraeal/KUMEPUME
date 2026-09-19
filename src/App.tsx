@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import KumepumeAbout from "./pages/KumepumeAbout";
 import Programs from "./pages/Programs";
 import SectionPreview from "./pages/SectionPreview";
+import Transparency from "./pages/Transparency";
 
 export default function App() {
   return (
@@ -24,7 +25,7 @@ export default function App() {
           <Route path="/activities/events" element={<Activities />} />
           <Route path="/activities/archive" element={<Activities />} />
           <Route path="/activities/:activityId" element={<ActivityDetail />} />
-          <Route path="/transparency/*" element={<SectionPreview section="transparency" />} />
+          <Route path="/transparency/*" element={<Transparency />} />
           <Route path="/join/*" element={<SectionPreview section="join" />} />
           <Route path="/contact" element={<SectionPreview section="contact" />} />
           <Route path="/about/*" element={<SectionPreview section="about" />} />
