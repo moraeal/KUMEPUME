@@ -49,7 +49,7 @@ export default function Home() {
         <div className="container-page grid min-h-[680px] items-stretch lg:grid-cols-[1.02fr_.98fr]">
           <div className="flex flex-col justify-center py-16 pr-0 sm:py-20 lg:pr-14">
             <p className="kumepume-eyebrow">CIVIC ACTION · SOCIAL IMPACT</p>
-            <h1 id="hero-title" className="mt-7 max-w-3xl text-[clamp(3rem,5.2vw,4.6rem)] font-black leading-[1.08] tracking-[-.055em] text-[#183b33]">꿈을 품고,<br />시민의 힘을 키웁니다.</h1>
+            <h1 id="hero-title" className="mt-7 max-w-3xl text-[clamp(2.8rem,4.55vw,4.2rem)] font-black leading-[1.08] tracking-[-.055em] text-[#183b33]">꿈을 품고,<br />시민의 힘을 키웁니다.</h1>
             <p className="mt-7 max-w-2xl text-lg font-medium leading-8 text-charcoal/70 sm:text-xl sm:leading-9">KUMEPUME는 나눔과 공익봉사를 통해 사람의 가능성을 키우고, 시민과 기업의 책임 있는 참여를 사회적 변화로 연결합니다.</p>
             <div className="mt-9 flex flex-wrap gap-3"><a href="#work" className="kumepume-button-primary">우리가 하는 일 <ArrowRight size={18} /></a><a href="#join" className="kumepume-button-secondary">함께하기</a></div>
             <div className="mt-12 grid max-w-xl gap-4 border-t border-[#183b33]/15 pt-6 sm:grid-cols-2">
