@@ -1,0 +1,218 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { font-synthesis: none; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+* { box-sizing: border-box; }
+body { margin: 0; background: #fffdf7; color: #252a2e; }
+button, input, textarea { font: inherit; }
+::selection { background: #d7c08b; color: #174c3a; }
+
+.seed-inline-editing main [data-seed-editable="true"] {
+  outline: 3px solid #c8a95b !important;
+  outline-offset: 4px;
+  border-radius: 2px;
+  cursor: text !important;
+  background-color: rgba(215, 192, 139, 0.16) !important;
+}
+
+@layer components {
+  .container-page { @apply mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-12; }
+  .article-content-frame { @apply mx-auto w-full max-w-4xl px-5 sm:px-8 lg:px-12; }
+  .section-band { @apply py-10 sm:py-12; }
+  .button-primary { @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-sm bg-green-deep px-5 py-3 font-bold text-white transition hover:bg-green-mid focus:outline-none focus:ring-2 focus:ring-gold; }
+  .button-secondary { @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-sm border border-green-deep/25 bg-transparent px-5 py-3 font-bold text-green-deep transition hover:bg-green-pale; }
+  .button-light { @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-md bg-white px-5 py-3 text-sm font-bold text-navy transition hover:-translate-y-0.5; }
+  .button-outline-light { @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-md border border-white/25 px-5 py-3 text-sm font-bold text-white transition hover:bg-white/10; }
+  .content-card { @apply rounded-sm border border-green-deep/15 bg-paper p-6 transition duration-300 hover:border-green-deep/35 hover:shadow-[0_18px_45px_rgba(31,51,73,0.09)]; }
+  .section-kicker { @apply text-[10px] font-extrabold tracking-[0.2em] text-green-mid; }
+  .section-heading { @apply flex flex-col justify-between gap-5 md:flex-row md:items-end; }
+  .section-heading h2 { @apply mt-3 text-3xl font-extrabold text-navy; }
+  .section-heading p { @apply mt-3 max-w-2xl text-sm leading-7 text-charcoal/60; }
+  .text-link { @apply inline-flex items-center gap-1.5 text-sm font-bold text-green-deep hover:text-green-mid; }
+  .eyebrow-pill { @apply inline-flex rounded-full border border-white/25 bg-white/10 px-3 py-1.5 text-xs font-bold text-white; }
+  .hero-arrow { @apply grid size-9 place-items-center rounded-full border border-white/25 text-white transition hover:bg-white hover:text-green-deep; }
+  .field { @apply grid gap-2 text-xs font-bold text-charcoal/70; }
+  .field input, .field textarea { @apply w-full rounded-md border border-green-deep/15 bg-white px-4 py-3.5 text-sm font-normal text-charcoal outline-none transition placeholder:text-charcoal/30 focus:border-green-mid focus:ring-2 focus:ring-green-mid/10; }
+  .article-detail-title { @apply mx-auto text-center text-[1.75rem] font-extrabold leading-[1.18] tracking-[-.035em] text-navy sm:text-[2.25rem]; max-width: 46rem; text-wrap: balance; word-break: keep-all; overflow-wrap: break-word; }
+  .article-detail-title-dark { @apply mx-auto text-center text-[1.75rem] font-extrabold leading-[1.18] tracking-[-.035em] text-white sm:text-[2.25rem]; max-width: 46rem; text-wrap: balance; word-break: keep-all; overflow-wrap: break-word; }
+  .article-detail-subtitle { @apply mx-auto mt-2 max-w-3xl text-center text-base font-bold leading-[1.55] text-green-deep sm:text-lg; text-wrap: balance; word-break: keep-all; }
+  .article-summary { @apply mx-auto mt-2.5 max-w-3xl text-[15px] leading-7 text-charcoal/65 sm:text-base; }
+  .reading-column { @apply mx-auto w-full max-w-[46rem]; }
+  .article-section { @apply mt-9 sm:mt-10; }
+  .article-section-long { @apply mt-10 sm:mt-12; }
+  .article-section-title { @apply text-[1.4rem] font-extrabold leading-[1.35] tracking-[-.025em] text-navy sm:text-2xl; }
+  .article-copy { @apply mt-3 text-[17px] leading-[1.78] tracking-[-.012em] text-charcoal/85 sm:text-lg sm:leading-[1.78]; }
+  .article-copy-long { @apply mt-3.5 leading-[1.82] sm:leading-[1.82]; }
+}
+
+@media (min-width: 1280px) {
+  .article-content-frame { max-width: 68rem; }
+  .article-detail-title,
+  .article-detail-title-dark,
+  .article-detail-subtitle,
+  .article-summary,
+  .reading-column { max-width: 50rem; }
+}
+
+.editorial-title { font-family: Georgia, "Noto Serif KR", "Nanum Myeongjo", serif; letter-spacing: -0.035em; }
+
+/* 메인페이지는 제목을 고딕으로 통일하고, 카드 밀도에 따라 두 단계의 소개문 규칙만 사용합니다. */
+.home-page .editorial-title {
+  font-family: Pretendard, "Noto Sans KR", ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: -0.025em;
+}
+
+.home-lead-summary {
+  @apply text-[14px] leading-6 text-charcoal/65 sm:text-base sm:leading-7;
+}
+
+.home-compact-summary {
+  @apply text-[12px] leading-[1.55] text-charcoal/60 sm:text-[13px] sm:leading-[1.55];
+}
+
+.hero-slide { position: relative; min-height: 530px; overflow: hidden; border-radius: 8px; box-shadow: 0 18px 55px rgba(31, 51, 73, 0.12); }
+.hero-slide::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 82% 18%, rgba(255,255,255,.12), transparent 34%); }
+.hero-green { background: linear-gradient(130deg, #174c3a 0%, #28644d 68%, #587b68 100%); }
+.hero-navy { background: linear-gradient(130deg, #172b40 0%, #294a65 70%, #47687b 100%); }
+.hero-gold { background: linear-gradient(130deg, #4b4431 0%, #7c6940 70%, #a98b4d 100%); }
+.hero-art-slide { min-height: 0; aspect-ratio: 756 / 331; align-self: start; background: #eef1e8; }
+.hero-art-slide::before { display: none; }
+
+/* 메인 좌측 상단 LH 대표 이미지의 AI 제작 출처 문구는 표시하지 않습니다. */
+[aria-roledescription="carousel"] .relative.overflow-hidden.bg-navy:has(> a > img[src$="lh-split-hero-v2.webp"]) > span.absolute.bottom-5.left-5 { display: none !important; }
+
+/* 메인 상단 우측 목록 썸네일이 행 높이만큼 늘어나며 초록 배경이 선처럼 드러나는 현상을 막습니다. */
+.bg-paper > section:first-child aside > a > div:first-child.overflow-hidden {
+  align-self: start;
+  background-color: transparent !important;
+}
+
+/* 메인 첫 화면의 외곽 여백만 줄여 좌우 콘텐츠를 더 단단하게 묶습니다. */
+.bg-paper > section:first-child {
+  padding-top: 0.875rem;
+  padding-bottom: 0.625rem;
+}
+
+@media (min-width: 640px) {
+  .bg-paper > section:first-child {
+    padding-top: 1.25rem;
+    padding-bottom: 0.875rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .bg-paper > section:first-child {
+    padding-top: 1.5rem;
+    padding-bottom: 0.75rem;
+  }
+}
+
+/* 데스크톱에서는 우측 목록의 별도 아랫선을 없애고 메인 섹션의 공통 하단선 하나로 마감합니다. */
+@media (min-width: 1280px) {
+  .bg-paper > section:first-child aside {
+    border-bottom-color: transparent !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .briefing-hero-banner { background-image: none !important; }
+  .hero-slide:not(.hero-art-slide) { min-height: 560px; }
+  .hero-art-slide { min-height: 440px; aspect-ratio: auto; }
+}
+
+/* KUMEPUME civic-organization homepage */
+.kumepume-home {
+  background: #fffdf8;
+}
+
+.kumepume-hero {
+  background:
+    radial-gradient(circle at 8% 12%, rgba(255, 192, 76, 0.24), transparent 26rem),
+    #f6f1e6;
+}
+
+.kumepume-eyebrow {
+  color: #e47716;
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+}
+
+.kumepume-section-title {
+  margin-top: 1rem;
+  color: #183b33;
+  font-size: clamp(2.15rem, 4.8vw, 3.65rem);
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  line-height: 1.12;
+  text-wrap: balance;
+}
+
+.kumepume-button-primary,
+.kumepume-button-secondary {
+  display: inline-flex;
+  min-height: 3rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 999px;
+  padding: 0.75rem 1.4rem;
+  font-size: 0.9rem;
+  font-weight: 900;
+  transition: transform 180ms ease, background-color 180ms ease, border-color 180ms ease;
+}
+
+.kumepume-button-primary {
+  background: #183b33;
+  color: white;
+}
+
+.kumepume-button-primary:hover {
+  background: #285748;
+  transform: translateY(-2px);
+}
+
+.kumepume-button-secondary {
+  border: 1px solid rgba(24, 59, 51, 0.28);
+  color: #183b33;
+}
+
+.kumepume-button-secondary:hover {
+  border-color: #183b33;
+  background: rgba(255, 255, 255, 0.65);
+  transform: translateY(-2px);
+}
+
+.kumepume-logo-mark {
+  position: relative;
+  display: inline-block;
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 50% 50% 48% 52%;
+  background: #ef901f;
+  transform: rotate(-8deg);
+}
+
+.kumepume-logo-mark span {
+  position: absolute;
+  display: block;
+  border-radius: 999px 0 999px 0;
+  background: #183b33;
+}
+
+.kumepume-logo-mark span:nth-child(1) { width: 0.78rem; height: 1.15rem; left: 0.64rem; top: 0.62rem; transform: rotate(-28deg); }
+.kumepume-logo-mark span:nth-child(2) { width: 0.72rem; height: 1.05rem; right: 0.58rem; top: 0.72rem; transform: rotate(58deg); }
+.kumepume-logo-mark span:nth-child(3) { width: 0.3rem; height: 1.22rem; left: 1.18rem; bottom: 0.36rem; border-radius: 999px; transform: rotate(4deg); }
+
+@media (max-width: 1023px) {
+  .kumepume-hero > .container-page {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .kumepume-hero > .container-page > div:first-child {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+}

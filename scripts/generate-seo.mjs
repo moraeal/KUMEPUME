@@ -1,0 +1,357 @@
+import { mkdir, readFile, writeFile } from "node:fs/promises";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import { createServer } from "vite";
+
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const dist = path.join(root, "dist");
+const template = await readFile(path.join(dist, "index.html"), "utf8");
+
+const server = await createServer({
+  configFile: false,
+  root,
+  appType: "custom",
+  server: { middlewareMode: true },
+  optimizeDeps: { noDiscovery: true },
+});
+const [{ seoRoutes, canonicalUrl, SITE_NAME, SITE_DESCRIPTION, SOCIAL_SITE_NAME, ENGLISH_SOCIAL_SITE_NAME, SITE_URL }, newsModule, briefingModule, columnModule, watchModule, seedWatchModule, siteContentModule, seedLanguageModule, seedLanguageEnvironmentModule, communityChestModule, legislativeCommentaryModule] = await Promise.all([
+  server.ssrLoadModule("/src/seo.ts"),
+  server.ssrLoadModule("/src/data/news.ts"),
+  server.ssrLoadModule("/src/data/allBriefings.ts"),
+  server.ssrLoadModule("/src/data/columns.ts"),
+  server.ssrLoadModule("/src/data/newsTrackerRegistry.ts"),
+  server.ssrLoadModule("/src/data/seedWatchIndex.ts"),
+  server.ssrLoadModule("/src/data/siteContent.ts"),
+  server.ssrLoadModule("/src/data/seedLanguage.ts"),
+  server.ssrLoadModule("/src/data/seedLanguageEnvironment.ts"),
+  server.ssrLoadModule("/src/data/communityChestResearch.ts"),
+  server.ssrLoadModule("/src/data/legislativeCommentaries.ts"),
+]);
+await server.close();
+
+const news = newsModule.newsArticles;
+const briefings = briefingModule.getAllBriefingsNewestFirst();
+const columns = columnModule.columns;
+const editorialColumns = columnModule.getColumnsNewestFirst();
+const hotIssueColumns = columnModule.getHotIssueColumnsNewestFirst();
+const watchCases = watchModule.publicInterestWatchCases;
+const seedWatchReferences = seedWatchModule.seedWatchReferences;
+const englishContent = siteContentModule.getContent("en");
+const seedLanguageArticles = [
+  ...seedLanguageEnvironmentModule.seedLanguageEnvironmentArticlesKo,
+  ...seedLanguageModule.seedLanguageArticlesKo,
+];
+const communityChestResearch = communityChestModule.communityChestResearch.ko;
+const legislativeCommentaries = legislativeCommentaryModule.legislativeCommentaries;
+const publisherLogo = `${SITE_URL}/images/brand/seed-civic-partners-logo.svg`;
+const koreaDateTime = (date) => date ? `${date}T00:00:00+09:00` : undefined;
+
+const seedWatchListing = seedWatchReferences.map((reference) => {
+  if (reference.kind === "news") {
+    const item = news.find((entry) => entry.slug === reference.slug);
+    return item ? { path: `/news/${item.slug}`, title: item.title, summary: item.summary, date: item.date } : null;
+  }
+  if (reference.kind === "briefing") {
+    const item = briefings.find((entry) => entry.slug === reference.slug);
+    return item ? { path: `/briefings/${item.slug}`, title: item.title, summary: item.summary, date: item.date } : null;
+  }
+  const item = columns.find((entry) => entry.slug === reference.slug);
+  return item ? { path: `/columns/${item.slug}`, title: item.title, summary: item.summary, date: item.date } : null;
+}).filter(Boolean).sort((a, b) => b.date.localeCompare(a.date));
+
+const escapeHtml = (value = "") => String(value)
+  .replaceAll("&", "&amp;")
+  .replaceAll("<", "&lt;")
+  .replaceAll(">", "&gt;")
+  .replaceAll('"', "&quot;")
+  .replaceAll("'", "&#039;");
+
+const cdata = (value = "") => `<![CDATA[${String(value).replaceAll("]]>", "]]]]><![CDATA[>")}]]>`;
+const rfc822 = (date) => new Date(`${date}T00:00:00+09:00`).toUTCString();
+
+const paragraphList = (items = []) => items.filter(Boolean).map((item) => `<p>${escapeHtml(item)}</p>`).join("\n");
+const bulletList = (items = []) => items.length ? `<ul>${items.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>` : "";
+
+function articleBody(route) {
+  if (route.path === "/") {
+    const latest = [
+      ...news.map((item) => ({ path: `/news/${item.slug}`, title: item.title, summary: item.summary, date: item.date })),
+      ...briefings.map((item) => ({ path: `/briefings/${item.slug}`, title: item.title, summary: item.summary, date: item.date })),
+      ...columns.map((item) => ({ path: `/columns/${item.slug}`, title: item.title, summary: item.summary, date: item.date })),
+      ...seedLanguageArticles.map((item) => ({ path: `/seed-language/${item.slug}`, title: item.title, summary: item.summary, date: item.date })),
+      ...legislativeCommentaries.map((item) => ({ path: `/monitoring/legislation/commentary/${item.slug}`, title: item.editions.ko.title, summary: item.editions.ko.summary, date: item.date })),
+    ].sort((a, b) => b.date.localeCompare(a.date) || a.title.localeCompare(b.title)).slice(0, 12);
+    return `<section><h2>최신 기사</h2><ul>${latest.map((item) => `<li><a href="${canonicalUrl(item.path)}"><strong>${escapeHtml(item.title)}</strong></a><p>${escapeHtml(item.summary)}</p></li>`).join("\n")}</ul></section>`;
+  }
+
+  if (route.path === "/en") return [
+    `<section><h2>About SEED VOICE</h2><p>${escapeHtml(englishContent.home.description)}</p></section>`,
+    `<section><h2>Our Core Values</h2>${bulletList(englishContent.home.pillars.map(([title, description]) => `${title}: ${description}`))}</section>`,
+    `<section><h2>Core Programs</h2>${bulletList(englishContent.home.programs.map(([title, description]) => `${title}: ${description}`))}</section>`,
+    `<section><h2>Political and Organizational Independence</h2><p>${escapeHtml(englishContent.about.independence)}</p></section>`,
+    `<section><h2>Founder &amp; President</h2><p><strong>${escapeHtml(englishContent.about.founderName)}</strong></p><p>${escapeHtml(englishContent.about.founderBio)}</p></section>`,
+    `<section><h2>Contact</h2><p>${escapeHtml(englishContent.about.contact)}</p></section>`,
+  ].join("\n");
+
+  const newsMatch = route.path.match(/^\/news\/([^/]+)$/);
+  if (newsMatch) {
+    const item = news.find((entry) => entry.slug === newsMatch[1]);
+    if (item) return [
+      `<p><strong>${escapeHtml(item.keySentence)}</strong></p>`,
+      ...item.sections.map((section) => `<section><h2>${escapeHtml(section.title)}</h2>${paragraphList(section.paragraphs)}${bulletList(section.bullets)}</section>`),
+      `<section><h2>시민이 지켜볼 점</h2>${bulletList(item.watchPoints)}</section>`,
+      `<section><h2>씨드의 관점</h2>${paragraphList(item.seedPerspective)}</section>`,
+    ].join("\n");
+  }
+
+  const briefingMatch = route.path.match(/^\/briefings\/([^/]+)(?:\/commentary)?$/);
+  if (briefingMatch) {
+    const item = briefings.find((entry) => entry.slug === briefingMatch[1]);
+    if (item) {
+      if (route.path.endsWith("/commentary") && item.commentary) return paragraphList(item.commentary.paragraphs);
+      return [
+        paragraphList(item.content),
+        ...(item.sections ?? []).map((section) => `<section><h2>${escapeHtml(section.title)}</h2>${paragraphList(section.paragraphs)}${bulletList(section.bullets)}</section>`),
+        item.watchPoints?.length ? `<section><h2>시민이 지켜볼 점</h2>${bulletList(item.watchPoints)}</section>` : "",
+      ].join("\n");
+    }
+  }
+
+  const columnMatch = route.path.match(/^\/columns\/([^/]+)$/);
+  if (columnMatch) {
+    const item = columns.find((entry) => entry.slug === columnMatch[1]);
+    if (item) return item.sections.map((section) => `<section><h2>${escapeHtml(section.title)}</h2>${paragraphList(section.paragraphs)}${bulletList(section.quote)}</section>`).join("\n");
+  }
+
+  const watchMatch = route.path.match(/^\/monitoring\/([^/]+)$/);
+  if (watchMatch) {
+    const item = watchCases.find((entry) => entry.slug === watchMatch[1]);
+    if (item) return [
+      `<section><h2>확인된 사실</h2>${bulletList(item.confirmedFacts.map((fact) => fact.ko))}</section>`,
+      `<section><h2>시민이 물을 점</h2>${bulletList(item.questions.map((question) => question.ko))}</section>`,
+      `<section><h2>씨드의 제안</h2>${bulletList(item.proposals.map((proposal) => proposal.ko))}</section>`,
+    ].join("\n");
+  }
+
+  const legislativeCommentaryMatch = route.path.match(/^\/monitoring\/legislation\/commentary\/([^/]+)$/);
+  if (legislativeCommentaryMatch) {
+    const item = legislativeCommentaries.find((entry) => entry.slug === legislativeCommentaryMatch[1]);
+    if (item) {
+      const edition = item.editions.ko;
+      return [
+        `<section><h2>핵심 요약</h2>${bulletList(edition.keyPoints)}</section>`,
+        ...edition.sections.map((section) => `<section><h2>${escapeHtml(section.title)}</h2>${paragraphList(section.paragraphs)}${section.quote ? `<blockquote>${escapeHtml(section.quote)}</blockquote>` : ""}</section>`),
+        `<section><h2>자료와 확인 기준</h2><p>${escapeHtml(edition.sourceNote)}</p><ul>${item.sources.map((source) => `<li><a href="${escapeHtml(source.url)}">${escapeHtml(source.label.ko)}</a></li>`).join("")}</ul></section>`,
+      ].join("\n");
+    }
+  }
+
+  const seedLanguageMatch = route.path.match(/^\/seed-language\/([^/]+)$/);
+  if (seedLanguageMatch) {
+    const item = seedLanguageArticles.find((entry) => entry.slug === seedLanguageMatch[1]);
+    if (item) return [
+      `<section><h2>핵심 요약</h2>${bulletList(item.keyPoints)}</section>`,
+      paragraphList(item.leadParagraphs),
+      ...item.sections.map((section) => `<section><h2>${escapeHtml(section.title)}</h2>${paragraphList(section.paragraphs)}</section>`),
+    ].join("\n");
+  }
+
+  if (route.path === "/research/community-chest-of-korea") return [
+    `<section><h2>핵심 요약</h2>${paragraphList(communityChestResearch.summary)}</section>`,
+    ...communityChestResearch.sections.map((section) =>
+      `<section><h2>${escapeHtml(section.title)}</h2><p><strong>${escapeHtml(section.deck)}</strong></p>${paragraphList(section.paragraphs)}${bulletList(section.bullets ?? [])}</section>`
+    ),
+    `<section><h2>결론</h2>${paragraphList(communityChestResearch.conclusion)}</section>`,
+    `<section><h2>확인 자료</h2><ul>${communityChestResearch.sources.map((source) => `<li><a href="${escapeHtml(source.url)}">${escapeHtml(source.label)}</a></li>`).join("")}</ul></section>`,
+  ].join("\n");
+
+  const listing = route.path === "/news" ? [
+      ...news.map((item) => ({ path: `/news/${item.slug}`, title: item.title, summary: item.summary })),
+      ...hotIssueColumns.map((item) => ({ path: `/columns/${item.slug}`, title: item.title, summary: item.summary })),
+    ]
+    : route.path === "/briefings" ? briefings.map((item) => ({ path: `/briefings/${item.slug}`, title: item.title, summary: item.summary }))
+    : route.path === "/columns" ? editorialColumns.map((item) => ({ path: `/columns/${item.slug}`, title: item.title, summary: item.summary }))
+    : route.path === "/monitoring" ? [
+      ...seedWatchListing,
+      ...watchCases.map((item) => ({ path: `/monitoring/${item.slug}`, title: item.title.ko, summary: item.summary.ko })),
+    ]
+    : route.path === "/monitoring/legislation" ? legislativeCommentaries.map((item) => ({ path: `/monitoring/legislation/commentary/${item.slug}`, title: item.editions.ko.title, summary: item.editions.ko.summary }))
+    : [];
+
+  if (listing.length) return `<ul>${listing.map((item) => `<li><a href="${canonicalUrl(item.path)}"><strong>${escapeHtml(item.title)}</strong></a><p>${escapeHtml(item.summary)}</p></li>`).join("\n")}</ul>`;
+  return `<p>${escapeHtml(route.description)}</p>`;
+}
+
+function structuredData(route) {
+  const language = route.language === "en" ? "en" : "ko-KR";
+  const siteName = route.language === "en" ? ENGLISH_SOCIAL_SITE_NAME : SOCIAL_SITE_NAME;
+  if (route.path === "/" || route.path === "/en") return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": `${SITE_URL}/#organization`,
+        name: siteName,
+        url: SITE_URL,
+        logo: { "@type": "ImageObject", url: publisherLogo },
+        description: route.description,
+        sameAs: ["https://x.com/SeedVoice_KR"],
+      },
+      {
+        "@type": "WebSite",
+        "@id": `${SITE_URL}/#website`,
+        name: siteName,
+        url: canonicalUrl(route.path),
+        inLanguage: language,
+        publisher: { "@id": `${SITE_URL}/#organization` },
+      },
+    ],
+  };
+  if (route.type === "article") return {
+    "@context": "https://schema.org",
+    "@type": /^\/(?:news|briefings|monitoring)\//.test(route.path) ? "NewsArticle" : "Article",
+    headline: route.title.replace(/ \| .*$/, ""),
+    description: route.description,
+    datePublished: koreaDateTime(route.publishedAt ?? route.lastModified),
+    dateModified: koreaDateTime(route.lastModified ?? route.publishedAt),
+    mainEntityOfPage: canonicalUrl(route.path),
+    author: { "@type": route.author && route.author !== SITE_NAME ? "Person" : "Organization", name: route.author || SITE_NAME },
+    publisher: { "@type": "Organization", name: SITE_NAME, url: SITE_URL, logo: { "@type": "ImageObject", url: publisherLogo }, sameAs: ["https://x.com/SeedVoice_KR"] },
+    articleSection: route.section,
+    inLanguage: language,
+    ...(route.image ? { image: route.image } : {}),
+  };
+  return {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: route.title.replace(/ \| .*$/, ""),
+    description: route.description,
+    url: canonicalUrl(route.path),
+    isPartOf: { "@type": "WebSite", name: siteName, url: SITE_URL },
+    inLanguage: language,
+  };
+}
+
+function render(route) {
+  const title = escapeHtml(route.title);
+  const description = escapeHtml(route.description);
+  const canonical = canonicalUrl(route.path);
+  const language = route.language === "en" ? "en" : "ko";
+  const siteName = route.language === "en" ? ENGLISH_SOCIAL_SITE_NAME : SOCIAL_SITE_NAME;
+  const languageAlternates = route.path === "/" || route.path === "/en"
+    ? `\n    <link rel="alternate" hreflang="ko" href="${canonicalUrl("/")}" />\n    <link rel="alternate" hreflang="en" href="${canonicalUrl("/en")}" />\n    <link rel="alternate" hreflang="x-default" href="${canonicalUrl("/")}" />`
+    : "";
+  const jsonLd = JSON.stringify(structuredData(route)).replaceAll("<", "\\u003c");
+  const socialImage = route.image ? `
+    <meta property="og:image" content="${escapeHtml(route.image)}" />
+    <meta property="og:image:secure_url" content="${escapeHtml(route.image)}" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="${escapeHtml(route.imageAlt || route.title)}" />
+    <meta name="twitter:image" content="${escapeHtml(route.image)}" />
+    <meta name="twitter:image:alt" content="${escapeHtml(route.imageAlt || route.title)}" />` : "";
+  const head = `
+    <title>${title}</title>
+    <meta name="description" content="${description}" />
+    <meta name="robots" content="${route.noindex ? "noindex, follow" : "index, follow, max-image-preview:large"}" />
+    <link rel="canonical" href="${canonical}" />${languageAlternates}
+    <meta property="og:type" content="${route.type}" />
+    <meta property="og:site_name" content="${siteName}" />
+    <meta property="og:title" content="${title}" />
+    <meta property="og:description" content="${description}" />
+    <meta property="og:url" content="${canonical}" />
+    ${socialImage}
+    <meta name="twitter:card" content="${route.image ? "summary_large_image" : "summary"}" />
+    <meta name="twitter:title" content="${title}" />
+    <meta name="twitter:description" content="${description}" />
+    <script type="application/ld+json">${jsonLd}</script>`;
+  const fallbackLabel = route.language === "en" ? "Search-engine content" : "검색엔진용 본문";
+  const fallbackSection = route.section || siteName;
+  const fallback = `<article aria-label="${fallbackLabel}" style="max-width:860px;margin:0 auto;padding:48px 24px;font-family:system-ui,sans-serif;line-height:1.85;color:#26332f"><p style="font-size:12px;letter-spacing:.12em;color:#426b59">${escapeHtml(fallbackSection)}</p><h1 style="font-size:clamp(2rem,5vw,3.5rem);line-height:1.2;color:#123b30">${title.replace(/ \| .*$/, "")}</h1><p style="font-size:1.1rem;color:#4d5c56">${description}</p>${articleBody(route)}</article>`;
+
+  return template
+    .replace(/<html\s+lang="[^"]*">/i, `<html lang="${language}">`)
+    .replace(/\s*<title>[\s\S]*?<\/title>/i, "")
+    .replace(/\s*<meta\s+name="description"[\s\S]*?\/>/i, "")
+    .replace(/\s*<meta\s+name="robots"[\s\S]*?\/>/i, "")
+    .replace(/\s*<link\s+rel="canonical"[\s\S]*?\/>/i, "")
+    .replace(/\s*<meta\s+(?:property="og:[^"]+"|name="twitter:[^"]+")[\s\S]*?\/>/gi, "")
+    .replace(/\s*<script\s+type="application\/ld\+json">[\s\S]*?<\/script>/gi, "")
+    .replace("</head>", `${head}\n  </head>`)
+    .replace('<div id="root"></div>', `<div id="root">${fallback}</div>`);
+}
+
+for (const route of seoRoutes) {
+  const output = route.path === "/" ? path.join(dist, "index.html") : path.join(dist, route.path.slice(1), "index.html");
+  await mkdir(path.dirname(output), { recursive: true });
+  await writeFile(output, render(route));
+}
+
+// Serve the account screen directly instead of routing through the cached
+// homepage shell. This also makes newly deployed signup form changes appear
+// immediately at /account.
+const accountShell = template
+  .replace(/<title>[\s\S]*?<\/title>/i, "<title>내 계정 | 씨앗의 소리</title>")
+  .replace(/<meta\s+name="robots"[\s\S]*?\/>/i, '<meta name="robots" content="noindex" />')
+  .replace(/<link\s+rel="canonical"[\s\S]*?\/>/i, '<link rel="canonical" href="https://seedvoice.kr/account" />')
+  .replace(/\s*<script\s+type="application\/ld\+json">[\s\S]*?<\/script>/gi, "");
+await mkdir(path.join(dist, "account"), { recursive: true });
+await writeFile(path.join(dist, "account", "index.html"), accountShell);
+
+const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${seoRoutes.filter((route) => !route.noindex).map((route) => `  <url>\n    <loc>${canonicalUrl(route.path)}</loc>${route.lastModified ? `\n    <lastmod>${route.lastModified}</lastmod>` : ""}\n  </url>`).join("\n")}\n</urlset>\n`;
+await writeFile(path.join(dist, "sitemap.xml"), sitemap);
+
+const newsCutoff = new Date();
+newsCutoff.setUTCDate(newsCutoff.getUTCDate() - 2);
+const recentNewsRoutes = seoRoutes.filter((route) =>
+  route.type === "article"
+  && route.lastModified
+  && !["/founding-statement", "/publisher-message"].includes(route.path)
+  && new Date(`${route.lastModified}T23:59:59Z`) >= newsCutoff
+);
+const newsSitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
+${recentNewsRoutes.map((route) => `  <url>
+    <loc>${canonicalUrl(route.path)}</loc>
+    <news:news>
+      <news:publication>
+        <news:name>${escapeHtml(SITE_NAME)}</news:name>
+        <news:language>ko</news:language>
+      </news:publication>
+      <news:publication_date>${route.lastModified}</news:publication_date>
+      <news:title>${escapeHtml(route.title.replace(/ \| .*$/, ""))}</news:title>
+    </news:news>
+  </url>`).join("\n")}
+</urlset>
+`;
+await writeFile(path.join(dist, "news-sitemap.xml"), newsSitemap);
+const feedRoutes = seoRoutes
+  .filter((route) => route.type === "article" && route.lastModified)
+  .sort((a, b) => b.lastModified.localeCompare(a.lastModified) || a.path.localeCompare(b.path))
+  .slice(0, 50);
+const rss = `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>${SITE_NAME}</title>
+    <link>${SITE_URL}/</link>
+    <description>${cdata(SITE_DESCRIPTION)}</description>
+    <language>ko-KR</language>
+    <atom:link href="${SITE_URL}/rss.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>${rfc822(feedRoutes[0].lastModified)}</lastBuildDate>
+${feedRoutes.map((route) => `    <item>
+      <title>${cdata(route.title.replace(/ \| .*$/, ""))}</title>
+      <link>${canonicalUrl(route.path)}</link>
+      <guid isPermaLink="true">${canonicalUrl(route.path)}</guid>
+      <pubDate>${rfc822(route.lastModified)}</pubDate>
+      <dc:creator>${cdata(route.author || SITE_NAME)}</dc:creator>
+      <category>${cdata(route.section || SITE_NAME)}</category>
+      <description>${cdata(route.description)}</description>
+      <content:encoded>${cdata(articleBody(route))}</content:encoded>
+    </item>`).join("\n")}
+  </channel>
+</rss>
+`;
+await writeFile(path.join(dist, "rss.xml"), rss);
+await writeFile(path.join(dist, "robots.txt"), `User-agent: *\nAllow: /\n\nSitemap: ${SITE_URL}/sitemap.xml\nSitemap: ${SITE_URL}/news-sitemap.xml\n`);
