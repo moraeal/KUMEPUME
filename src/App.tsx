@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
+import LegacyRouteFallback from "./components/LegacyRouteFallback";
 import ScrollToTop from "./components/ScrollToTop";
 import Activities from "./pages/Activities";
 import ActivityDetail from "./pages/ActivityDetail";
@@ -9,7 +10,6 @@ import AboutSubpage from "./pages/AboutSubpage";
 import KumepumeAbout from "./pages/KumepumeAbout";
 import Join from "./pages/Join";
 import Programs from "./pages/Programs";
-import SectionPreview from "./pages/SectionPreview";
 import Transparency from "./pages/Transparency";
 
 export default function App() {
@@ -31,7 +31,7 @@ export default function App() {
           <Route path="/join/*" element={<Join />} />
           <Route path="/contact" element={<Join />} />
           <Route path="/about/*" element={<AboutSubpage />} />
-          <Route path="*" element={<SectionPreview section="not-found" />} />
+          <Route path="*" element={<LegacyRouteFallback />} />
         </Routes>
       </main>
       <Footer />
