@@ -129,7 +129,6 @@ button, input, textarea { font: inherit; }
 .kumepume-hero {
   position: relative;
   height: 140svh;
-  overflow: hidden;
   background: #183b33;
 }
 
@@ -167,8 +166,7 @@ button, input, textarea { font: inherit; }
   top: 0;
   display: block;
   height: 100svh;
-  transform: scale(1.04);
-  transform-origin: center;
+  transform: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
