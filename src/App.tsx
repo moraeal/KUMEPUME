@@ -15,15 +15,17 @@ import LegacyArchive from "./pages/LegacyArchive";
 import LegacyStoryDetail from "./pages/LegacyStoryDetail";
 import LegacyVideos from "./pages/LegacyVideos";
 import KumepumeRouteMetadata from "./components/KumepumeRouteMetadata";
+import { SiteLanguageProvider } from "./components/SiteLanguage";
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-[#fffdf8] text-charcoal">
-      <ScrollToTop />
-      <KumepumeRouteMetadata />
-      <Header />
-      <main>
-        <Routes>
+    <SiteLanguageProvider>
+      <div className="min-h-screen bg-[#fffdf8] text-charcoal">
+        <ScrollToTop />
+        <KumepumeRouteMetadata />
+        <Header />
+        <main>
+          <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<KumepumeAbout />} />
           <Route path="/programs/*" element={<Programs />} />
@@ -40,9 +42,10 @@ export default function App() {
           <Route path="/contact" element={<Join />} />
           <Route path="/about/*" element={<AboutSubpage />} />
           <Route path="*" element={<LegacyRouteFallback />} />
-        </Routes>
-      </main>
-      <Footer />
-    </div>
+          </Routes>
+        </main>
+        <Footer />
+      </div>
+    </SiteLanguageProvider>
   );
 }
