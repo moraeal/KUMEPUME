@@ -49,7 +49,7 @@ export default function Home() {
         <img
           src={`${base}images/seed-language/public-interest-citizens-action.webp`}
           alt="세대가 다른 시민들이 지역의 미래를 함께 논의하는 모습"
-          className="absolute inset-0 size-full object-cover"
+          className="kumepume-hero-image absolute inset-0 size-full object-cover"
         />
         <div className="container-page relative z-10 flex min-h-[calc(100svh-86px)] items-center py-16">
           <h1 id="hero-title" className="kumepume-hero-slogan text-[clamp(2.35rem,6.2vw,6.2rem)] font-black leading-[1.12] tracking-[-.06em] text-white">
