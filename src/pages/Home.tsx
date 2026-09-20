@@ -47,8 +47,8 @@ export default function Home() {
     <div className="kumepume-home">
       <section className="kumepume-hero" aria-labelledby="hero-title">
         <img
-          src={`${base}images/seed-language/public-interest-citizens-action.webp`}
-          alt="세대가 다른 시민들이 지역의 미래를 함께 논의하는 모습"
+          src={`${base}images/kumepume/hero-children-garden-2026.webp`}
+          alt="햇살이 드는 정원에서 함께 자연을 살펴보는 아이들"
           className="kumepume-hero-image absolute inset-0 size-full object-cover"
         />
         <div className="container-page relative z-10 flex min-h-[calc(100svh-86px)] items-end pb-20 pt-16 sm:pb-24 lg:pb-28">
