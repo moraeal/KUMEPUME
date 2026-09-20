@@ -2,7 +2,6 @@ import {
   ArrowRight,
   BookOpen,
   Building2,
-  CheckCircle2,
   Globe2,
   HandHeart,
   HeartHandshake,
@@ -47,22 +46,16 @@ export default function Home() {
   return (
     <div className="kumepume-home">
       <section className="kumepume-hero" aria-labelledby="hero-title">
-        <div className="container-page grid min-h-[680px] items-stretch lg:grid-cols-[1.02fr_.98fr]">
-          <div className="flex flex-col justify-center py-16 pr-0 sm:py-20 lg:pr-14">
-            <p className="kumepume-eyebrow">CIVIC ACTION · SOCIAL IMPACT</p>
-            <h1 id="hero-title" className="mt-7 max-w-3xl text-[clamp(2.8rem,4.55vw,4.2rem)] font-black leading-[1.08] tracking-[-.055em] text-[#183b33]">꿈을 품고,<br />시민의 힘을 키웁니다.</h1>
-            <p className="mt-7 max-w-2xl text-lg font-medium leading-8 text-charcoal/70 sm:text-xl sm:leading-9">KUMEPUME는 나눔과 공익봉사를 통해 사람의 가능성을 키우고, 시민과 기업의 책임 있는 참여를 사회적 변화로 연결합니다.</p>
-            <div className="mt-9 flex flex-wrap gap-3"><Link to="/programs" className="kumepume-button-primary">우리가 하는 일 <ArrowRight size={18} /></Link><Link to="/join" className="kumepume-button-secondary">함께하기</Link></div>
-            <div className="mt-12 grid max-w-xl gap-4 border-t border-[#183b33]/15 pt-6 sm:grid-cols-2">
-              <p className="flex gap-3 text-sm font-bold leading-6 text-[#183b33]"><CheckCircle2 className="mt-0.5 shrink-0 text-[#e88920]" size={19} />노블레스 오블리주를 시민적 공익봉사로 확산합니다.</p>
-              <p className="flex gap-3 text-sm font-bold leading-6 text-[#183b33]"><CheckCircle2 className="mt-0.5 shrink-0 text-[#e88920]" size={19} />선의를 지속가능한 소셜 임팩트로 만듭니다.</p>
-            </div>
-          </div>
-          <div className="relative min-h-[430px] overflow-hidden lg:min-h-full">
-            <img src={`${base}images/seed-language/public-interest-citizens-action.webp`} alt="세대가 다른 시민들이 지역의 미래를 함께 논의하는 모습" className="absolute inset-0 size-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#183b33]/55 via-transparent to-transparent" />
-            <div className="absolute bottom-7 left-7 right-7 rounded-sm bg-white/92 p-5 shadow-xl backdrop-blur sm:bottom-9 sm:left-9 sm:right-auto sm:max-w-sm"><p className="text-xs font-black tracking-[.16em] text-[#e88920]">KUMEPUME MISSION</p><p className="mt-2 text-xl font-black leading-8 tracking-[-.025em] text-[#183b33]">사람을 돕는 일에서 시민이 함께 변화를 만드는 일까지</p></div>
-          </div>
+        <img
+          src={`${base}images/seed-language/public-interest-citizens-action.webp`}
+          alt="세대가 다른 시민들이 지역의 미래를 함께 논의하는 모습"
+          className="absolute inset-0 size-full object-cover"
+        />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(10,35,30,.76)_0%,rgba(10,35,30,.38)_48%,rgba(10,35,30,.12)_100%)]" />
+        <div className="container-page relative z-10 flex min-h-[calc(100svh-86px)] items-center py-16">
+          <h1 id="hero-title" className="max-w-5xl text-[clamp(2.55rem,6.5vw,6.4rem)] font-black leading-[1.08] tracking-[-.06em] text-white [text-shadow:0_3px_26px_rgba(0,0,0,.3)]">
+            꿈을 키우고 품을 키웁니다.<br />시민이 자랍니다.
+          </h1>
         </div>
       </section>
 
