@@ -134,9 +134,14 @@ button, input, textarea { font: inherit; }
 }
 
 .kumepume-hero-slogan {
-  -webkit-text-stroke: 1.5px rgba(15, 40, 35, 0.92);
+  -webkit-text-stroke: 3px rgba(15, 40, 35, 0.96);
   paint-order: stroke fill;
-  text-shadow: 6px 6px 0 rgba(15, 40, 35, 0.82);
+  text-shadow:
+    6px 6px 0 rgba(15, 40, 35, 0.88),
+    0 0 3px rgba(15, 40, 35, 0.92),
+    0 0 8px rgba(15, 40, 35, 0.62),
+    0 0 16px rgba(15, 40, 35, 0.32),
+    0 0 28px rgba(15, 40, 35, 0.12);
 }
 
 .kumepume-hero-image {
