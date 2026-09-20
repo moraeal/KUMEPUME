@@ -54,7 +54,7 @@ export default function Home() {
         <div className="container-page relative z-10 flex min-h-[calc(100svh-86px)] items-end pb-20 pt-16 sm:pb-24 lg:pb-28">
           <h1 id="hero-title" className="kumepume-hero-slogan text-[clamp(2.05rem,5.25vw,5.2rem)] font-black leading-[1.32] tracking-[-.06em] text-white">
             <span className="kumepume-hero-slogan-line block whitespace-nowrap">꿈을 키우고</span>
-            <span className="kumepume-hero-slogan-line block whitespace-nowrap">품을 키웁니다.</span>
+            <span className="kumepume-hero-slogan-line block whitespace-nowrap">품을 키웁니다</span>
             <span className="kumepume-hero-slogan-line block whitespace-nowrap">시민이 자랍니다.</span>
           </h1>
         </div>
