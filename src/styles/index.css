@@ -139,6 +139,26 @@ button, input, textarea { font: inherit; }
   text-shadow: 6px 6px 0 rgba(15, 40, 35, 0.82);
 }
 
+.kumepume-hero-image {
+  transform: scale(1.04);
+  transform-origin: center;
+  animation: kumepume-hero-motion 24s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+@keyframes kumepume-hero-motion {
+  0% { transform: translate3d(-1.2%, -0.4%, 0) scale(1.04); }
+  50% { transform: translate3d(0.6%, 0.5%, 0) scale(1.09); }
+  100% { transform: translate3d(1.4%, -0.2%, 0) scale(1.055); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kumepume-hero-image {
+    animation: none;
+    transform: scale(1.04);
+  }
+}
+
 .kumepume-eyebrow {
   color: #e47716;
   font-size: 0.72rem;
