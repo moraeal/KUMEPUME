@@ -128,9 +128,15 @@ button, input, textarea { font: inherit; }
 
 .kumepume-hero {
   position: relative;
-  min-height: calc(100svh - 86px);
+  height: 140svh;
   overflow: hidden;
   background: #183b33;
+}
+
+.kumepume-hero-copy {
+  position: absolute;
+  inset: 0;
+  min-height: 100svh;
 }
 
 .kumepume-hero-slogan {
@@ -157,24 +163,15 @@ button, input, textarea { font: inherit; }
 }
 
 .kumepume-hero-image {
+  position: sticky;
+  top: 0;
+  display: block;
+  height: 100svh;
   transform: scale(1.04);
   transform-origin: center;
-  animation: kumepume-hero-motion 24s ease-in-out infinite alternate;
-  will-change: transform;
-}
-
-@keyframes kumepume-hero-motion {
-  0% { transform: translate3d(-1.2%, -0.4%, 0) scale(1.04); }
-  50% { transform: translate3d(0.6%, 0.5%, 0) scale(1.09); }
-  100% { transform: translate3d(1.4%, -0.2%, 0) scale(1.055); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .kumepume-hero-image {
-    animation: none;
-    transform: scale(1.04);
-  }
-
   .kumepume-hero-slogan-line {
     opacity: 1;
     animation: none;
@@ -256,6 +253,6 @@ button, input, textarea { font: inherit; }
 
 @media (max-width: 1023px) {
   .kumepume-hero {
-    min-height: calc(100svh - 78px);
+    height: 140svh;
   }
 }
