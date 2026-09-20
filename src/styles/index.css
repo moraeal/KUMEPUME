@@ -133,6 +133,12 @@ button, input, textarea { font: inherit; }
   background: #183b33;
 }
 
+.kumepume-hero-slogan {
+  -webkit-text-stroke: 1.5px rgba(15, 40, 35, 0.92);
+  paint-order: stroke fill;
+  text-shadow: 6px 6px 0 rgba(15, 40, 35, 0.82);
+}
+
 .kumepume-eyebrow {
   color: #e47716;
   font-size: 0.72rem;
