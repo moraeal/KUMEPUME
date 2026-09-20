@@ -51,10 +51,11 @@ export default function Home() {
           alt="세대가 다른 시민들이 지역의 미래를 함께 논의하는 모습"
           className="absolute inset-0 size-full object-cover"
         />
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(10,35,30,.76)_0%,rgba(10,35,30,.38)_48%,rgba(10,35,30,.12)_100%)]" />
         <div className="container-page relative z-10 flex min-h-[calc(100svh-86px)] items-center py-16">
-          <h1 id="hero-title" className="max-w-5xl text-[clamp(2.55rem,6.5vw,6.4rem)] font-black leading-[1.08] tracking-[-.06em] text-white [text-shadow:0_3px_26px_rgba(0,0,0,.3)]">
-            꿈을 키우고 품을 키웁니다.<br />시민이 자랍니다.
+          <h1 id="hero-title" className="kumepume-hero-slogan text-[clamp(2.35rem,6.2vw,6.2rem)] font-black leading-[1.12] tracking-[-.06em] text-white">
+            <span className="block whitespace-nowrap">꿈을 키우고</span>
+            <span className="block whitespace-nowrap">품을 키웁니다.</span>
+            <span className="block whitespace-nowrap">시민이 자랍니다.</span>
           </h1>
         </div>
       </section>
