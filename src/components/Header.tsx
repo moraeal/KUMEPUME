@@ -9,13 +9,11 @@ const navigation = (english: boolean): NavigationItem[] => english ? [
   { label: "KUMEPUME", href: "/about", children: [["About us", "/about"], ["Message", "/about/message"], ["History", "/about/history"], ["Our team", "/about/organization"], ["Identity & vision", "/about/identity"], ["Partners", "/about/partners"], ["Contact", "/about/contact"]] },
   { label: "Programs", href: "/programs", children: [["Nurture dreams", "/programs/care"], ["Grow citizens", "/programs/citizens"], ["Protect the public good", "/programs/public-interest"], ["Connect with the world", "/programs/global"]] },
   { label: "Activities & impact", href: "/activities", children: [["Recent activities", "/activities"], ["Stories of change", "/activities/stories"], ["Events", "/activities/events"], ["By year", "/activities/archive"], ["Archive", "/stories/archive"], ["Videos", "/stories/videos"]] },
-  { label: "SEED VOICE", href: "https://seedvoice.kr", external: true },
   { label: "Transparency", href: "/transparency", children: [["Organization", "/transparency/corporate"], ["Governance", "/transparency/governance"], ["Plans", "/transparency/plans"], ["Donations", "/transparency/donations"], ["Financial disclosure", "/transparency/financials"], ["Reports", "/transparency/reports"]] },
 ] : [
   { label: "꿈에품에", href: "/about", children: [["단체 소개", "/about"], ["인사말", "/about/message"], ["연혁", "/about/history"], ["조직·사람", "/about/organization"], ["CI·비전", "/about/identity"], ["협력기관", "/about/partners"], ["오시는 길", "/about/contact"]] },
   { label: "사업", href: "/programs", children: [["꿈을 보듬다", "/programs/care"], ["시민을 키우다", "/programs/citizens"], ["공익을 지키다", "/programs/public-interest"], ["세계와 잇다", "/programs/global"]] },
   { label: "활동과 성과", href: "/activities", children: [["최근 활동", "/activities"], ["변화 이야기", "/activities/stories"], ["행사", "/activities/events"], ["연도별 활동", "/activities/archive"], ["과거 기록", "/stories/archive"], ["영상 기록", "/stories/videos"]] },
-  { label: "씨앗의 소리", href: "https://seedvoice.kr", external: true },
   { label: "투명경영", href: "/transparency", children: [["단체현황", "/transparency/corporate"], ["거버넌스", "/transparency/governance"], ["사업계획", "/transparency/plans"], ["기부금", "/transparency/donations"], ["결산·공시", "/transparency/financials"], ["보고서", "/transparency/reports"]] },
 ];
 
