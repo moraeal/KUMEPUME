@@ -10,6 +10,7 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 
 const disclosures = [
   { year: "2024", title: "연간 기부금 모금액 및 활용실적 명세서", file: "2024-donation-use-report.pdf", pages: 2, size: "66KB", published: "2025.04.25" },
@@ -35,6 +36,12 @@ const base = import.meta.env.BASE_URL;
 
 export default function Transparency() {
   const location = useLocation();
+
+  useEffect(() => {
+    if (location.pathname !== "/transparency/financials") return;
+    const frame = window.requestAnimationFrame(() => document.getElementById("financials")?.scrollIntoView({ block: "start" }));
+    return () => window.cancelAnimationFrame(frame);
+  }, [location.pathname]);
 
   return (
     <div className="bg-[#fffdf8]">
@@ -132,12 +139,40 @@ export default function Transparency() {
         </div>
       </section>
 
+      <section id="financials" className="scroll-mt-36 bg-[#f2f5ec] py-20 sm:py-24">
+        <div className="container-page">
+          <div className="grid gap-10 lg:grid-cols-[.72fr_1.28fr] lg:gap-20">
+            <div>
+              <p className="kumepume-eyebrow">FINANCIAL DISCLOSURE</p>
+              <h2 className="mt-5 text-4xl font-black leading-tight tracking-[-.045em] text-[#183b33] sm:text-5xl">결산·공시</h2>
+              <p className="mt-6 text-[15px] leading-8 text-charcoal/62">공익법인 결산서류의 공시자료 원본을 공개합니다. 공시연도와 실제 결산 대상 사업연도를 구분해 표시합니다.</p>
+            </div>
+            <div className="border-t-2 border-[#183b33]">
+              <a
+                href={`${base}documents/transparency/2025-financial-disclosure-2024-fiscal-year.pdf`}
+                target="_blank"
+                rel="noreferrer"
+                className="group flex flex-col justify-between gap-5 border-b border-[#183b33]/15 bg-white p-7 transition hover:bg-[#fff9ef] sm:flex-row sm:items-center sm:p-9"
+              >
+                <div>
+                  <p className="text-xs font-black tracking-[.14em] text-[#e47716]">2025년 공시</p>
+                  <h3 className="mt-3 text-2xl font-black leading-9 text-[#183b33]">2025년도 결산공시 자료</h3>
+                  <p className="mt-3 text-sm leading-7 text-charcoal/60">2024년 귀속 · 공익법인 결산서류 등의 공시(간편서식) · 원본 PDF 3쪽</p>
+                </div>
+                <span className="inline-flex shrink-0 items-center gap-2 text-sm font-black text-[#183b33]">첨부파일 보기 <ArrowDownToLine size={18} className="transition group-hover:translate-y-0.5" /></span>
+              </a>
+              <p className="mt-5 text-xs leading-6 text-charcoal/55">※ 첨부 문서는 2025년 작성·공시된 2024년 사업연도 결산자료입니다. 2025년 사업연도 결산자료로 오인하지 않도록 구분합니다. 기존 2024년 기부금 활용실적 명세서는 별도로 유지합니다.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section id="reports" className="scroll-mt-36 bg-[#183b33] py-20 text-white sm:py-24">
         <div className="container-page grid gap-10 lg:grid-cols-[.8fr_1.2fr] lg:items-center lg:gap-20">
           <div><p className="text-xs font-black tracking-[.2em] text-[#ffc04c]">REPORTS &amp; ARCHIVE</p><h2 className="mt-5 text-4xl font-black tracking-[-.045em] sm:text-5xl">보고서·자료실</h2><p className="mt-6 text-[15px] leading-8 text-white/62">기존 ‘보고서’와 ‘자료’ 페이지는 제목만 남아 있고 첨부문서는 확인되지 않았습니다. 원본 파일이 확보되는 대로 연도·발행일·출처를 검증해 추가합니다.</p></div>
           <div className="grid gap-px bg-white/15 sm:grid-cols-2">
             <div className="bg-white/[.045] p-8"><FileText className="text-[#ffc04c]"/><h3 className="mt-6 text-xl font-black">연차보고서</h3><p className="mt-3 text-sm leading-7 text-white/55">기존 공개 파일 미확인</p><span className="mt-6 inline-flex items-center gap-2 text-xs font-black text-[#ffc04c]"><Clock3 size={14}/>원본 확인 중</span></div>
-            <div className="bg-white/[.045] p-8"><Landmark className="text-[#ffc04c]"/><h3 className="mt-6 text-xl font-black">결산·공익법인 공시</h3><p className="mt-3 text-sm leading-7 text-white/55">최신 결산서류와 외부 공시 링크 확인 중</p><span className="mt-6 inline-flex items-center gap-2 text-xs font-black text-[#ffc04c]"><Clock3 size={14}/>검증 후 공개</span></div>
+            <Link to="/transparency/financials" className="bg-white/[.045] p-8 transition hover:bg-white/10"><Landmark className="text-[#ffc04c]"/><h3 className="mt-6 text-xl font-black">결산·공익법인 공시</h3><p className="mt-3 text-sm leading-7 text-white/55">2025년도 결산공시 자료 (2024년 귀속) 원문 공개</p><span className="mt-6 inline-flex items-center gap-2 text-xs font-black text-[#ffc04c]"><FileCheck2 size={14}/>첨부 PDF 보기</span></Link>
           </div>
         </div>
       </section>
