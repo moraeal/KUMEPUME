@@ -13,6 +13,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 
 const disclosures = [
+  { year: "2025", title: "2025년도 결산공시 자료 (2024년 귀속)", file: "2025-financial-disclosure-2024-fiscal-year.pdf", pages: 3, size: "192KB", published: "2025.04.25" },
   { year: "2024", title: "연간 기부금 모금액 및 활용실적 명세서", file: "2024-donation-use-report.pdf", pages: 2, size: "66KB", published: "2025.04.25" },
   { year: "2023", title: "기부금품의 수입 및 지출 명세서", file: "2023-donation-income-expense-report.pdf", pages: 2, size: "95KB", published: "기존 홈페이지 공개본" },
   { year: "2022", title: "연간 기부금 모금액 및 활용실적 명세서", file: "2022-donation-use-report.pdf", pages: 2, size: "44KB", published: "2023.04.25" },
@@ -39,7 +40,7 @@ export default function Transparency() {
 
   useEffect(() => {
     if (location.pathname !== "/transparency/financials") return;
-    const frame = window.requestAnimationFrame(() => document.getElementById("financials")?.scrollIntoView({ block: "start" }));
+    const frame = window.requestAnimationFrame(() => document.getElementById("donations")?.scrollIntoView({ block: "start" }));
     return () => window.cancelAnimationFrame(frame);
   }, [location.pathname]);
 
@@ -56,7 +57,7 @@ export default function Transparency() {
           <div>
             <p className="max-w-2xl text-lg leading-9 text-white/68">꿈에품에가 어떤 기준으로 운영되고, 시민의 참여와 기부가 어떻게 쓰였는지 누구나 확인할 수 있도록 공개합니다.</p>
             <div className="mt-7 flex flex-wrap gap-3">
-              <span className="rounded-full border border-[#ffc04c]/45 bg-[#ffc04c]/10 px-4 py-2 text-xs font-black text-[#ffc04c]">2017–2024 기부금 문서 8건</span>
+              <span className="rounded-full border border-[#ffc04c]/45 bg-[#ffc04c]/10 px-4 py-2 text-xs font-black text-[#ffc04c]">기부금 공개자료 8건 · 2025년 결산공시 1건</span>
               <span className="rounded-full border border-white/15 px-4 py-2 text-xs font-black text-white/62">PDF 원본 보존</span>
               <span className="rounded-full border border-white/15 px-4 py-2 text-xs font-black text-white/62">최신 정보 검증 중</span>
             </div>
@@ -122,46 +123,18 @@ export default function Transparency() {
             <div>
               <p className="kumepume-eyebrow">DONATION DISCLOSURE</p>
               <h2 className="mt-5 text-4xl font-black leading-tight tracking-[-.045em] text-[#183b33] sm:text-5xl">기부금 모금·활용실적</h2>
-              <p className="mt-6 text-[15px] leading-8 text-charcoal/62">기존 홈페이지에 첨부된 PDF 가운데 사업연도가 확인되는 기부금 공개문서만 선별했습니다. 파일은 수정하지 않은 원본입니다.</p>
-              <div className="mt-8 border-t border-[#183b33]/15 pt-6 text-xs leading-6 text-charcoal/48"><p>공개 범위: 2017–2024 사업연도</p><p>중복 파일 1건과 비공시 문서 1건은 공개 목록에서 제외하고 원본 보관소에 유지했습니다.</p></div>
+              <p className="mt-6 text-[15px] leading-8 text-charcoal/62">2017–2024년 기부금 공개자료와 2025년도 결산공시 자료를 한 목록에서 확인할 수 있습니다. 모든 PDF는 원본 그대로 보존했습니다.</p>
+              <div className="mt-8 border-t border-[#183b33]/15 pt-6 text-xs leading-6 text-charcoal/48"><p>기부금 활용실적: 2017–2024 사업연도 · 결산공시: 2025년 공시(2024년 귀속)</p><p>중복 파일 1건과 비공시 문서 1건은 공개 목록에서 제외하고 원본 보관소에 유지했습니다.</p></div>
             </div>
             <div className="border-t-2 border-[#183b33]">
               {disclosures.map((item) => (
                 <a key={item.year} href={`${base}documents/transparency/${item.file}`} target="_blank" rel="noreferrer" className="group grid gap-3 border-b border-[#183b33]/12 py-6 transition hover:bg-white sm:grid-cols-[90px_1fr_auto] sm:items-center sm:px-4">
                   <strong className="text-2xl font-black text-[#e47716]">{item.year}</strong>
-                  <div><h3 className="font-black text-[#183b33]">{item.title}</h3><p className="mt-1.5 text-xs text-charcoal/45">{item.year} 사업연도 · PDF {item.pages}쪽 · {item.size} · 문서 표기 {item.published}</p></div>
+                  <div><h3 className="font-black text-[#183b33]">{item.title}</h3><p className="mt-1.5 text-xs text-charcoal/45">{item.year === "2025" ? "2025년 공시 · 2024년 귀속" : `${item.year} 사업연도`} · PDF {item.pages}쪽 · {item.size} · 문서 표기 {item.published}</p></div>
                   <span className="inline-flex items-center gap-2 text-sm font-black text-[#183b33]">원문 보기 <ArrowDownToLine size={16} className="transition group-hover:translate-y-0.5"/></span>
                 </a>
               ))}
               <div className="border-b border-[#183b33]/12 bg-[#f3eee4] px-5 py-6 text-sm leading-7 text-charcoal/62"><strong className="mr-2 text-[#183b33]">2015년 기록</strong>기존 페이지에서 ‘2015년도 기부금 수입 및 사용내역 결산서’ 공고문을 확인했으나 첨부 원본은 확인되지 않았습니다. 공고문은 원본 아카이브에 보존하고 문서 확보 후 추가합니다.</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="financials" className="scroll-mt-36 bg-[#f2f5ec] py-20 sm:py-24">
-        <div className="container-page">
-          <div className="grid gap-10 lg:grid-cols-[.72fr_1.28fr] lg:gap-20">
-            <div>
-              <p className="kumepume-eyebrow">FINANCIAL DISCLOSURE</p>
-              <h2 className="mt-5 text-4xl font-black leading-tight tracking-[-.045em] text-[#183b33] sm:text-5xl">결산·공시</h2>
-              <p className="mt-6 text-[15px] leading-8 text-charcoal/62">공익법인 결산서류의 공시자료 원본을 공개합니다. 공시연도와 실제 결산 대상 사업연도를 구분해 표시합니다.</p>
-            </div>
-            <div className="border-t-2 border-[#183b33]">
-              <a
-                href={`${base}documents/transparency/2025-financial-disclosure-2024-fiscal-year.pdf`}
-                target="_blank"
-                rel="noreferrer"
-                className="group flex flex-col justify-between gap-5 border-b border-[#183b33]/15 bg-white p-7 transition hover:bg-[#fff9ef] sm:flex-row sm:items-center sm:p-9"
-              >
-                <div>
-                  <p className="text-xs font-black tracking-[.14em] text-[#e47716]">2025년 공시</p>
-                  <h3 className="mt-3 text-2xl font-black leading-9 text-[#183b33]">2025년도 결산공시 자료</h3>
-                  <p className="mt-3 text-sm leading-7 text-charcoal/60">2024년 귀속 · 공익법인 결산서류 등의 공시(간편서식) · 원본 PDF 3쪽</p>
-                </div>
-                <span className="inline-flex shrink-0 items-center gap-2 text-sm font-black text-[#183b33]">첨부파일 보기 <ArrowDownToLine size={18} className="transition group-hover:translate-y-0.5" /></span>
-              </a>
-              <p className="mt-5 text-xs leading-6 text-charcoal/55">※ 첨부 문서는 2025년 작성·공시된 2024년 사업연도 결산자료입니다. 2025년 사업연도 결산자료로 오인하지 않도록 구분합니다. 기존 2024년 기부금 활용실적 명세서는 별도로 유지합니다.</p>
             </div>
           </div>
         </div>
