@@ -129,7 +129,7 @@ export default function Transparency() {
             <div className="border-t-2 border-[#183b33]">
               {disclosures.map((item) => (
                 <a key={item.year} href={`${base}documents/transparency/${item.file}`} target="_blank" rel="noreferrer" className="group grid gap-3 border-b border-[#183b33]/12 py-6 transition hover:bg-white sm:grid-cols-[90px_1fr_auto] sm:items-center sm:px-4">
-                  <strong className="text-2xl font-black text-[#e47716]">{item.year}</strong>
+                  <strong className="whitespace-nowrap font-sans text-2xl font-black leading-none tracking-[-.035em] tabular-nums text-[#e47716]">{item.year}</strong>
                   <div><h3 className="font-black text-[#183b33]">{item.title}</h3><p className="mt-1.5 text-xs text-charcoal/45">{item.year === "2025" ? "2025년 공시 · 2024년 귀속" : `${item.year} 사업연도`} · PDF {item.pages}쪽 · {item.size} · 문서 표기 {item.published}</p></div>
                   <span className="inline-flex items-center gap-2 text-sm font-black text-[#183b33]">원문 보기 <ArrowDownToLine size={16} className="transition group-hover:translate-y-0.5"/></span>
                 </a>
